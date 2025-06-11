@@ -1,0 +1,25 @@
+{
+  "name": "tennisapp",
+  "version": "1.0.0",
+  "description": "\"# TennisChalApp\"",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && node server.js",
+    "client": "cd frontend && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdubuche27/TennisChalApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mdubuche27/TennisChalApp/issues"
+  },
+  "homepage": "https://github.com/mdubuche27/TennisChalApp#readme",
+  "dependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

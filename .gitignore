@@ -1,3 +1,8 @@
+#Backend Project 
 /backend/node_modules
 
+#FrontEnd Project
 /frontend/node_modules
+
+#Base Project
+/node_modules

@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function App() {
+  const [matches, setMatches] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/matches")
+      .then(res => setMatches(res.data.matches || []))
+      .catch(err => console.error(err));
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Résultats Tennis</h1>
+      {matches.length === 0 ? <p>Chargement...</p> :
+        <ul>
+          {matches.map((match, index) => (
+            <li key={index}>{match.player1} vs {match.player2} - {match.status}</li>
+          ))}
+        </ul>
+      }
     </div>
   );
 }
