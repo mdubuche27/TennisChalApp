@@ -14,6 +14,7 @@ function App() {
       const res = await axios.get(`http://localhost:5000/api/tournaments?month=${month}&year=${year}`);
       console.log(res);
       setTournaments(res.data);
+      console.log(res.data);
     } catch (error) {
       console.error("Erreur lors du chargement des tournois :", error);
     }
@@ -60,7 +61,7 @@ function App() {
           ) : (
             tournaments.map((t, i) => (
               <li key={i}>
-                <strong>{t.name.split('-')[0]}</strong> - {t.contry.name}, {t.court.name} <br />
+                <strong>{t.name.split('-')[0]}</strong> - {t.name} <br />
                 📅 {t.date} → {t.date}
               </li>
             ))
