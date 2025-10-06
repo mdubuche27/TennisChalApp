@@ -1,7 +1,9 @@
-const express = require("express");
-const cors = require("cors");
-const dotenv = require("dotenv");
-const tournamentsRoutes = require("./routes/tournaments");
+import  express from  "express" ;
+import  cors from  "cors";
+import  dotenv from "dotenv";
+
+import tournamentsRoutes from "./routes/tournaments.js";
+import  usersRouter from "./routes/users.js";
 
 dotenv.config();
 
@@ -13,6 +15,7 @@ app.use(express.json()); // Pour parser les JSON envoyés en POST
 
 // Routes
 app.use("/api/tournaments", tournamentsRoutes);
+app.use('/api/users', usersRouter);
 
 // Health check
 app.get("/", (req, res) => {

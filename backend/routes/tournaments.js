@@ -1,7 +1,9 @@
-const express = require("express");
+import express from "express";
+import { getTournamentsByMonth } from "../controllers/tournaments.js";
+
 const router = express.Router();
-const { getTournamentsByMonth } = require("../controllers/tournaments");
 
-router.get("/", getTournamentsByMonth);
+router.get("/tournaments", getTournamentsByMonth);
 
-module.exports = router;
+// ✅ Export compatible ES modules
+export default router;

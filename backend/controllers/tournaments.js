@@ -1,6 +1,7 @@
-const TennisService = require("../services/tennis");
+import TennisService from "../services/tennis.js";
 
-exports.getTournamentsByMonth = async (req, res) => {
+// ✅ On exporte une fonction nommée avec `export const`
+export const getTournamentsByMonth = async (req, res) => {
   const { month, year } = req.query;
 
   if (!month || !year) {
