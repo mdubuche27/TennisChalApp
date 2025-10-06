@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS matches (
+  id SERIAL PRIMARY KEY,
+  tournament_id INT REFERENCES tournaments(id) ON DELETE CASCADE,
+  player1 VARCHAR(100),
+  player2 VARCHAR(100),
+  score VARCHAR(50),
+  match_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
