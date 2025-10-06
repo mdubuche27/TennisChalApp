@@ -4,6 +4,8 @@ import  dotenv from "dotenv";
 
 import tournamentsRoutes from "./routes/tournaments.js";
 import  usersRouter from "./routes/users.js";
+import authRoutes from "./routes/auth.js";
+import authenticateToken from "./middleware/auth.js";
 
 dotenv.config();
 
@@ -14,8 +16,11 @@ app.use(cors());
 app.use(express.json()); // Pour parser les JSON envoyés en POST
 
 // Routes
+app.use("/api/auth", authRoutes);
+
+
 app.use("/api/tournaments", tournamentsRoutes);
-app.use('/api/users', usersRouter);
+app.use("/api/users", authenticateToken, usersRouter);
 
 // Health check
 app.get("/", (req, res) => {
