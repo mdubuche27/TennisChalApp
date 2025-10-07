@@ -4,6 +4,5 @@ CREATE TABLE IF NOT EXISTS players (
   last_name   VARCHAR(50) NOT NULL,
   nationality TEXT NOT NULL,
   ranking     INT,
-  -- clé unique composite pour éviter les doublons exacts
   UNIQUE (first_name, last_name)
 );

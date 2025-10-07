@@ -1,71 +1,89 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import './Register.css';
 
-function Register() {
+/**
+ * Registration component following ATP branding.
+ *
+ * Props:
+ * - onLogin: callback invoked to switch back to the login page after registration.
+ */
+function Register({ onLogin }) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const res = await fetch('http://localhost:5000/api/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, email, password }),
-      });
-      if (!res.ok) {
-        const { error } = await res.json();
-        setError(error);
-        return;
-      }
-      const { token } = await res.json();
-      // option : stocker le token et rediriger directement vers les utilisateurs
-      localStorage.setItem('token', token);
-      navigate('/users');
-      // si vous préférez obliger l’utilisateur à se connecter, utilisez :
-      // navigate('/login');
-    } catch {
-      setError('Erreur réseau');
+    // Basic validation to check matching passwords
+    if (password !== confirmPassword) {
+      alert('Les mots de passe ne correspondent pas.');
+      return;
+    }
+    // TODO: integrate registration logic here
+    // For now, switch back to login page
+    if (onLogin) {
+      onLogin();
     }
   };
 
   return (
-    <div>
-      <h2>Inscription</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Nom d&apos;utilisateur</label>
+    <div className="auth-container">
+      <div className="auth-card">
+        <img
+          src={`${process.env.PUBLIC_URL}/logo512.png`}
+          alt="ATP Logo"
+          className="auth-logo"
+        />
+        <h2 className="auth-title">Créer un compte</h2>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="username">Nom d'utilisateur</label>
           <input
             type="text"
+            id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            placeholder="Votre nom"
             required
           />
-        </div>
-        <div>
-          <label>Email</label>
+          <label htmlFor="email">Adresse email</label>
           <input
             type="email"
+            id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="Votre email"
             required
           />
-        </div>
-        <div>
-          <label>Mot de passe</label>
+          <label htmlFor="password">Mot de passe</label>
           <input
             type="password"
+            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Mot de passe"
             required
           />
-        </div>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">Créer le compte</button>
-      </form>
+          <label htmlFor="confirmPassword">Confirmez le mot de passe</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="Confirmer le mot de passe"
+            required
+          />
+          <button type="submit" className="auth-button">
+            S'inscrire
+          </button>
+        </form>
+        <p className="auth-switch">
+          Déjà un compte ?{' '}
+          <button type="button" onClick={onLogin} className="link-button">
+            Se connecter
+          </button>
+        </p>
+      </div>
     </div>
   );
 }

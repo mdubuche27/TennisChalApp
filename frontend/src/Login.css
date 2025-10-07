@@ -1,0 +1,97 @@
+/*
+  Styles for authentication pages following the ATP branding.  
+  These classes are shared between the login and register pages.  
+*/
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0f8ff, #e6f7ff);
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.auth-card {
+  background: #ffffff;
+  padding: 40px 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-logo {
+  width: 80px;
+  height: auto;
+  margin: 0 auto 20px;
+  display: block;
+}
+
+.auth-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #004c99;
+}
+
+.auth-card form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-card label {
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #333333;
+}
+
+.auth-card input {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.auth-card input:focus {
+  border-color: #004c99;
+  outline: none;
+}
+
+.auth-button {
+  background-color: #004c99;
+  color: #ffffff;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.auth-button:hover {
+  background-color: #002f6c;
+}
+
+.auth-switch {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: #004c99;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.link-button:hover {
+  color: #002f6c;
+}

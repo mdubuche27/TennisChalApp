@@ -1,48 +1,58 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import './Login.css';
 
-function Login() {
+function Login({ onLogin, onRegisterClick }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const res = await fetch('http://localhost:5000/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-      if (!res.ok) {
-        const { error } = await res.json();
-        setError(error);
-        return;
-      }
-      const { token } = await res.json();
-      localStorage.setItem('token', token);
-      navigate('/users'); // redirection après succès
-    } catch (err) {
-      setError('Erreur réseau');
+
+    if (onLogin) {
+      onLogin();
     }
   };
 
   return (
-    <div>
-      <h2>Connexion</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        </div>
-        <div>
-          <label>Mot de passe</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        </div>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">Se connecter</button>
-      </form>
+    <div className="auth-container">
+      <div className="auth-card">
+        {/* Use the existing logo file from the public folder */}
+        <img
+          src={`${process.env.PUBLIC_URL}/logo512.png`}
+          alt="ATP Logo"
+          className="auth-logo"
+        />
+        <h2 className="auth-title">Connexion</h2>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="email">Adresse email</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Votre email"
+            required
+          />
+          <label htmlFor="password">Mot de passe</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Mot de passe"
+            required
+          />
+          <button type="submit" className="auth-button">
+            Se connecter
+          </button>
+        </form>
+        <p className="auth-switch">
+          Pas encore de compte ?{' '}
+          <button type="button" onClick={onRegisterClick} className="link-button">
+            Inscription
+          </button>
+        </p>
+      </div>
     </div>
   );
 }
